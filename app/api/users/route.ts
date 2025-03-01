@@ -13,7 +13,8 @@ import { getAllUsers, db } from "../../../lib/firestore";
 //     });
 //   }
 // };
-export const GET = async (req) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const GET = async (req: Request) => {
   try {
     const users = await getAllUsers(db);
     // console.log(`Users: ${JSON.stringify(users)}`);
