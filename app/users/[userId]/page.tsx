@@ -6,7 +6,7 @@ export default async function UserPage({
 }: {
   params: { userId: string };
 }) {
-  const { userId } = await params;
+  const { userId } = params;
   // console.log(userId);
   const response = await fetch(`${process.env.BASE_URL}/api/users/${userId}`);
   if (!response.ok) {

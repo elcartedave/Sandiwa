@@ -2,16 +2,15 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  const session = request.cookies.get("session")?.value; // Get token from cookies
+  const session = request.cookies.get("session")?.value;
   console.log(session);
   if (!session) {
-    return NextResponse.redirect(new URL("/auth/login", request.url)); // Redirect to login if no session
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
-  // Allow access if session exists
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/users/:path*", "/success/:path*"], // Protect these routes
+  matcher: ["/users/:path*", "/success/:path*"],
 };
