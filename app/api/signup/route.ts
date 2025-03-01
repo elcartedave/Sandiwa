@@ -1,7 +1,7 @@
 import { User } from "@/models/user";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const POST = async (req: Request, res: Response) => {
+export const POST = async (req: Request) => {
   try {
     const requested: User = await req.json();
     console.log(`Added user: ${JSON.stringify(requested)}!`);
