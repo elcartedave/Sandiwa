@@ -1,0 +1,17 @@
+[
+  {
+    "email": "daelcarte@up.edu.ph",
+    "password": "123456",
+    "id": 1
+  },
+  {
+    "email": "abcd@up.edu.ph",
+    "password": "1234567",
+    "id": 2
+  },
+  {
+    "email": "efgh@up.edu.ph",
+    "password": "234567",
+    "id": 3
+  }
+]
