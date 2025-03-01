@@ -3,8 +3,11 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const session = request.cookies.get("session")?.value;
-  console.log(session);
-  if (!session) {
+  const { pathname } = request.nextUrl;
+
+  const publicRoutes = ["/", "/auth/login", "/auth/signup"];
+
+  if (!session && !publicRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
@@ -12,5 +15,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/users/:path*", "/success/:path*"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

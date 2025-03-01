@@ -1,11 +1,7 @@
 import { Person } from "@/models/user";
 import { Box } from "@mui/material";
 
-export default async function UserPage({
-  params,
-}: {
-  params: { userId: string };
-}) {
+export default async function UserPage({ params }) {
   const { userId } = params;
   // console.log(userId);
   const response = await fetch(`${process.env.BASE_URL}/api/users/${userId}`);
