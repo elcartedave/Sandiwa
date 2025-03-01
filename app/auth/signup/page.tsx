@@ -2,7 +2,6 @@
 import { useAuth } from "@/context/AuthContext";
 import { User } from "@/models/user";
 import { Box, Button, Stack, TextField } from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,17 +18,21 @@ export default function SignUp() {
   const handleSignup = async (email: string, password: string) => {
     const newUser: User = { email, password, id: 1 } as User;
     try {
-      const response: object = await fetch("/api/signup", {
+      const response = await fetch("/api/signup", {
         method: "POST",
         body: JSON.stringify(newUser),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       if (response.status != 200) {
-        alert(response.message);
+        const data = await response.json();
+        alert(data.message);
       } else {
         router.push("/");
       }
     } catch (error) {
-      alert(error.message);
+      alert((error as Error).message);
     }
   };
   const { user, loading } = useAuth();

@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useAuth } from "@/context/AuthContext";
 import NotFound from "../not-found";
 import LoadingPage from "@/components/Loading";
-import { Box, Grid, Button, Stack, TextField } from "@mui/material";
+import { Grid, Button, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Person } from "@/models/user";
 import Usercard from "@/components/UserCard";

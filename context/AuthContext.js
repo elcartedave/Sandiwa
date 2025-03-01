@@ -3,8 +3,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   onAuthStateChanged,
-  signInWithPopup,
-  GoogleAuthProvider,
   signOut,
   signInWithEmailAndPassword,
 } from "firebase/auth";
@@ -16,8 +14,19 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUser(user);
+        const token = await user.getIdToken(); // Get Firebase ID token
+        await fetch("/api/session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token }),
+        }); // Store session in cookies
+      } else {
+        setUser(null);
+        await fetch("/api/session", { method: "DELETE" }); // Clear session cookie on logout
+      }
       setLoading(false);
     });
     return () => unsubscribe();
@@ -26,8 +35,7 @@ export function AuthProvider({ children }) {
   const signIn = async (email, password) => {
     setLoading(true);
     try {
-      const res = await signInWithEmailAndPassword(auth, email, password);
-      console.log(res);
+      await signInWithEmailAndPassword(auth, email, password);
       return { success: true, message: "Successful Log In!" };
     } catch (error) {
       if (

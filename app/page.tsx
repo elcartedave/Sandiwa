@@ -1,12 +1,9 @@
 "use client";
 import LoadingPage from "@/components/Loading";
 import { useAuth } from "@/context/AuthContext";
-import { Snackbar } from "@mui/material";
-import { useState } from "react";
 
 export default function Home() {
   const { user, loading } = useAuth();
-  const [open, setOpen] = useState(true);
 
   if (loading) return <LoadingPage />;
   if (!user) {

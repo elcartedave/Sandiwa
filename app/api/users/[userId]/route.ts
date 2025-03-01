@@ -1,5 +1,5 @@
 import { getUser, db } from "@/lib/firestore";
-export async function GET(req, { params }) {
+export async function GET(_req: Request, { params }) {
   try {
     const { userId } = await params;
     // alert(userId);

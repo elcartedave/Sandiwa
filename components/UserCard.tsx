@@ -1,6 +1,6 @@
 "use client";
 import { Person } from "@/models/user";
-import { Card, CardContent, Typography, Box, CardMedia } from "@mui/material";
+import { Card, CardContent, Typography, CardMedia } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 export default function Usercard(props: { user: Person }) {
